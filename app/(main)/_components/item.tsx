@@ -163,12 +163,14 @@ export const Item = ({
   );
 };
 
-Item.Skeleton = ({ level = 0 }: { level?: number }) => (
-  <div
-    style={{ paddingLeft: level ? `${level * 12 + 25}px` : "12px" }}
-    className="flex gap-x-2 py-[3px]"
-  >
-    <Skeleton className="w-4 h-4" />
-    <Skeleton className="w-[50%] h-4" />
-  </div>
-);
+Item.Skeleton = function ItemSkeleton({ level = 0 }: { level?: number }) {
+  return (
+    <div
+      style={{ paddingLeft: level ? `${level * 12 + 25}px` : "12px" }}
+      className="flex gap-x-2 py-[3px]"
+    >
+      <Skeleton className="w-4 h-4" />
+      <Skeleton className="w-[50%] h-4" />
+    </div>
+  );
+};

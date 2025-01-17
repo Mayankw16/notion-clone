@@ -210,11 +210,15 @@ export const getSearch = query({
 });
 
 export const getById = query({
-  args: { id: v.id("documents") },
+  args: { id: v.string() },
   handler: async (ctx, args) => {
-    const document = await ctx.db.get(args.id);
+    const documentId = ctx.db.normalizeId("documents", args.id);
 
-    if (!document) throw new ConvexError({ message: "Not Found!", code: 404 });
+    if (!documentId) return null;
+
+    const document = await ctx.db.get(documentId);
+
+    if (!document) return null;
 
     if (!document.isArchived && document.isPublished) return document;
 

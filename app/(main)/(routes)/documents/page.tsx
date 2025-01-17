@@ -39,7 +39,7 @@ const DocumentsPage = () => {
         height="300"
       />
       <h2 className="text-lg font-medium">
-        Welcome to {user?.firstName}'s Notion
+        Welcome to {user?.firstName}&apos;s Notion
       </h2>
       <Button onClick={onCreate}>
         <PlusCircle className="w-4 h-4 mr-2" />

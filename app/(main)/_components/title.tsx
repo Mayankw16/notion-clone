@@ -69,4 +69,6 @@ export const Title = ({ initialData }: TitleProps) => {
   );
 };
 
-Title.Skeleton = () => <Skeleton className="flex-1 rounded-md h-8" />;
+Title.Skeleton = function TitleSkeleton() {
+  return <Skeleton className="flex-1 rounded-md h-8" />;
+};
