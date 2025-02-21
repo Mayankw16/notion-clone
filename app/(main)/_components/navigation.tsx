@@ -93,10 +93,10 @@ export const Navigation = () => {
       setIsResetting(true);
 
       sidebarRef.current.style.width = isMobile ? "100%" : "240px";
-      navbarRef.current.style.setProperty("left", isMobile ? "100%" : "240px");
+      navbarRef.current.style.setProperty("left", isMobile ? "" : "240px");
       navbarRef.current.style.setProperty(
         "width",
-        isMobile ? "0" : "calc(100% - 240px)"
+        isMobile ? "100%" : "calc(100% - 240px)"
       );
       setTimeout(() => {
         setIsResetting(false);
@@ -133,15 +133,17 @@ export const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-full bg-secondary overflow-y-auto relative flex flex-col w-60 z-[99999]",
+          "group/sidebar h-full bg-secondary overflow-y-auto relative flex flex-col w-60 z-[999999]",
           isResetting && "transition-all ease-in-out duration-300",
-          isMobile && "w-0"
+          isMobile && "w-0 fixed"
         )}
       >
         <div>
           <div
             className={cn(
-              "w-6 h-6 rounded-sm text-muted-foreground hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition"
+              "w-6 h-6 rounded-sm text-muted-foreground absolute top-3 right-2 transition",
+              !isMobile &&
+                "hover:bg-neutral-300 dark:hover:bg-neutral-600 opacity-0 group-hover/sidebar:opacity-100"
             )}
             onClick={collapse}
             role="button"

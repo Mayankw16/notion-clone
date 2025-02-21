@@ -7,6 +7,8 @@ import { IconPicker } from "./icon-picker";
 import { Button } from "./ui/button";
 import { ImageIcon, Smile, X } from "lucide-react";
 import { useCoverImage } from "@/hooks/use-cover-image";
+import { useMediaQuery } from "usehooks-ts";
+import { cn } from "@/lib/utils";
 
 interface ToolbarProps {
   initialData: Doc<"documents">;
@@ -14,6 +16,7 @@ interface ToolbarProps {
 }
 
 export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
+  const isMobile = useMediaQuery("(max-width:768px)");
   const inputRef = useRef<ElementRef<"textarea">>(null);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -76,7 +79,10 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
             size="icon"
             variant="outline"
             onClick={onRemoveIcon}
-            className="text-xs text-muted-foreground rounded-full opacity-0 group-hover/icon:opacity-100 transition"
+            className={cn(
+              "text-xs text-muted-foreground rounded-full transition",
+              !isMobile && "opacity-0 group-hover/icon:opacity-100"
+            )}
           >
             <X className="w-4 h-4" />
           </Button>
@@ -85,7 +91,12 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
       {!!initialData.icon && preview && (
         <p className="text-6xl pt-6">{initialData.icon}</p>
       )}
-      <div className="opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4">
+      <div
+        className={cn(
+          "flex items-center gap-x-1 py-4",
+          !isMobile && "opacity-0 group-hover:opacity-100"
+        )}
+      >
         {!initialData.icon && !preview && (
           <IconPicker onChange={onIconSelect}>
             <Button
